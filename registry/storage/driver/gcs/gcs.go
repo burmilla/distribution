@@ -10,6 +10,7 @@
 // Note that the contents of incomplete uploads are not accessible even though
 // Stat returns their length
 //
+//go:build include_gcs
 // +build include_gcs
 
 package gcs
@@ -37,7 +38,7 @@ import (
 	"google.golang.org/cloud"
 	"google.golang.org/cloud/storage"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 
 	ctx "github.com/docker/distribution/context"
 	storagedriver "github.com/docker/distribution/registry/storage/driver"
@@ -591,7 +592,7 @@ func (d *driver) Stat(context ctx.Context, path string) (storagedriver.FileInfo,
 }
 
 // List returns a list of the objects that are direct descendants of the
-//given path.
+// given path.
 func (d *driver) List(context ctx.Context, path string) ([]string, error) {
 	var query *storage.Query
 	query = &storage.Query{}
